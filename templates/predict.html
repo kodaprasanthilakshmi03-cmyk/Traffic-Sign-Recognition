@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Traffic Sign Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('/static/uploads/main.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+    .predict-section {
+      padding: 60px 15px;
+      text-align: center;
+      color: white;
+    }
+    .predict-card {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .predict-card h3 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .btn-custom {
+      background-color: #ffc107;
+      color: #000;
+      font-weight: 500;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .btn-custom:hover {
+      background-color: #e0a800;
+    }
+    img.preview {
+      max-width: 100%;
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    .result-text {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+  <div class="predict-section">
+    <div class="predict-card">
+      <h3>🚦 Upload Traffic Sign Image</h3>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <input class="form-control" type="file" name="file" required onchange="showPreview(event)">
+        </div>
+        <button type="submit" class="btn btn-warning">Predict</button>
+      </form>
+      {% if filename %}
+        <h4 class="mt-4">Uploaded Image:</h4>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" class="preview" id="preview" alt="Uploaded Image">
+      {% else %}
+        <img id="preview" class="preview" style="display: none;" />
+      {% endif %}
+      {% if prediction %}
+        <div class="result-text">Result: {{ prediction }}</div>
+      {% endif %}
+
+      <div class="mt-4">
+        <a href="/" class="btn btn-custom">🏠Back to Home</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showPreview(event) {
+      const [file] = event.target.files;
+      if (file) {
+        const preview = document.getElementById('preview');
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
