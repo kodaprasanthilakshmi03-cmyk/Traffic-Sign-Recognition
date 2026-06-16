@@ -119,7 +119,7 @@ Traffic-Sign-Recognition/
 
 ## 👨‍💻 Project Purpose
 
-This project was developed as part of an **AI Internship**, to gain hands-on experience in deep learning, computer vision, and full-stack AI deployment.
+This project was developed by Prashanthi as part of an AI Internship, to gain hands-on experience in deep learning, computer vision, and full-stack AI deployment.
 
 ---
 
